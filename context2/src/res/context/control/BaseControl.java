@@ -4,13 +4,12 @@ import context.dao.UserRepository;
 import context.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.jws.WebParam;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
@@ -44,8 +43,24 @@ public class BaseControl {
 
     @RequestMapping(value = "/regist",method = RequestMethod.POST,produces="text/html;charset=UTF-8")
     public String delRegist(User user){
-        System.out.print("性别"+user.getGender());
-        int id=repository.insertUser(user.getPassword(),user.getUsername(),user.getGender(),"15051888552",18);
+        //System.out.print("性别"+user.getGender());
+        int id=repository.insertUser(user.getPassword(),user.getUsername(),"男","15051888552",18);
+        return  "redirect:/user/"+id;
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String loginin(){
+        return "login";
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public String delLoginIn(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session){
+        session.setAttribute("islogined",true);
+        session.setAttribute("username",username);
+
+        User user=repository.findUserByUsername(username);
+
+        long id=user.getId();
         return  "redirect:/user/"+id;
     }
 }

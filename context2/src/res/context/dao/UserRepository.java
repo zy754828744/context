@@ -18,7 +18,8 @@ import java.sql.SQLException;
 @Repository
 public class UserRepository {
     private final String SELECT_BY_ID="select * from userinfo where id=?";
-    private final String INSERT_USER="insert into userinfo(username,gender,phonenumber,age,password) values(?,?,?,?,?)";
+    private final String SELECT_BY_USERNAME="select * from userinfo where username=?";
+    private final String INSERT_USER="insert into userinfo(username,password) values(?,?)";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -44,6 +45,23 @@ public class UserRepository {
 
     }
 
+    public User findUserByUsername(String username){
+
+        return jdbcTemplate.queryForObject(SELECT_BY_ID, new RowMapper<User>() {
+            public User mapRow(ResultSet resultSet, int i) throws SQLException {
+                User result=new User();
+                result.setId(resultSet.getLong("id"));
+                result.setAge(resultSet.getInt("age"));
+                result.setGender(resultSet.getString("gender"));
+                result.setUsername(resultSet.getString("username"));
+                result.setPhoneNumber(resultSet.getString("phonenumber"));
+                result.setPassword(resultSet.getString("password"));
+                return result;
+            }
+        },username);
+
+    }
+
     public int  insertUser(final String password, final String username, final String gender, String phoneNumber, final int age){
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -52,12 +70,9 @@ public class UserRepository {
                     public PreparedStatement createPreparedStatement(Connection con) throws SQLException
                     {
                         PreparedStatement ps = jdbcTemplate.getDataSource()
-                                .getConnection().prepareStatement(INSERT_USER,new String[]{ "username" ,"gender","phonenumber","age","password"});
+                                .getConnection().prepareStatement(INSERT_USER,new String[]{ "username","password"});
                         ps.setString(1, username);
-                        ps.setString(2, gender);
-                        ps.setString(3,"15051888552");
-                        ps.setInt(4,age);
-                        ps.setString(5,password);
+                        ps.setString(2,password);
                         return ps;
                     }
                 }, keyHolder);
