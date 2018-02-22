@@ -5,6 +5,7 @@
   Time: 11:11
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
@@ -25,7 +26,7 @@
 
 <div class="card form-container">
     <div class="card-body">
-    <form method="post" class="form-signin">
+    <form method="post" class="form-signin" action="<s:url value="/regist"/> ">
         <img src="image/logo.png" class="mb-3" width="72" height="72">
         <div class="form-group">
             <label for="username" class="sr-only">用户名：</label><input class="form-control" id="username" type="text" placeholder="用户名" name="username"  required autofocus>
@@ -36,6 +37,8 @@
         <div class="form-group">
             <label for="gender" class="sr-only">确认密码：</label><input class="form-control" id="gender" type="text" name="gender" placeholder="确认密码"  required><br/>
         </div>
+
+        <a href="<s:url value="/login"/>" class=" small "><p class="text-left" style="color: #ff0000">已有账号？快速登录</p></a>
 
         <input id="submit" type="submit" value="注册" class="btn btn-primary">
 
