@@ -7,9 +7,12 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 
 @Configuration
 @ComponentScan(basePackageClasses = ComponetScanEmptyInterface.class
@@ -37,5 +40,10 @@ public class RootConfig {
     @Autowired
     public JdbcTemplate getJdbcTemplate(DataSource source){
         return new JdbcTemplate(source);
+    }
+
+    @Bean
+    public MultipartResolver multipartResolver() throws IOException{
+        return new StandardServletMultipartResolver();
     }
 }

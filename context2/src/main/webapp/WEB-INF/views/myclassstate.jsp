@@ -21,7 +21,7 @@
     <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
     <link rel="stylesheet" href="css/bootstrap.css"/>
 
-    <title>个人主页</title>
+    <title>我的美食课堂</title>
 </head>
 <body>
 
@@ -104,7 +104,11 @@
     .leftNav {
         float: left;
     }
-
+    li.classitem{
+        list-style-type:none;
+        margin: 20px;
+        margin-bottom: 40px;
+    }
 </style>
 <header>
     <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
@@ -143,7 +147,7 @@
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="<s:url value="/userpage"/>">个人主页</a>
-                    <a class="dropdown-item" href="<s:url value="/createstate"/>">创建动态</a>
+                    <a class="dropdown-item" href="<s:url value="/data/createstate"/>">创建动态</a>
                     <a class="dropdown-item" href="<s:url value="/set"/>">设置</a>
                     <a class="dropdown-item" href="<s:url value="/loginout"/>">退出</a>
                 </div>
@@ -176,11 +180,11 @@
                         </div>
                     </div>
                 </div>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="javascript:void(0);" class="nav-link">我的美食动态</a>
                 </li>
-                <li class="nav-item">
-                    <a href="<s:url value="/myclassstate" />" class="nav-link urlNav">我的课堂</a>
+                <li class="nav-item active">
+                    <a href="<s:url value="/myclassstate" />" class="nav-link urlNav">我的美食课堂</a>
                 </li>
                 <li class="nav-item">
                     <a href="javascript:void(0);" class="nav-link">私信</a>
@@ -192,98 +196,78 @@
         </nav>
 
         <div class="float-left " style="padding: 20px;width: 65%">
-            <div class="h-75" style="padding-bottom: 100px">
-                <div class="media">
-                    <img class="mr-3 rounded-circle" src="image/userimage.png" alt="Generic placeholder image" style="max-width: 50px;max-height: 50px">
-                    <div class="media-body">
-                        <h5 class="mt-0">zgw</h5>
-                        <span class="small"><%=new Date()%></span>
-                    </div>
-                </div>
-                <div>
-                    <span class="d-block" style="padding: 5px">这里是动态内容，拉啦啦！</span>
-                    <img src="image/logo.png" style="max-width:80%;max-height:90%;">
-                </div>
-                <hr/>
-                <div class="state-tail " style="margin-top: 20px">
-                    <img src="image/dianzan.png" alt="好吃" class="dianzan float-left mutual"
-                         style="max-width: 25px;max-height: 25px;margin-left: 20px;cursor: pointer" >
-                    <p class="count small float-left text-muted" style="margin-top: 5px">1000</p>
-                    <p class="small float-left text-muted" style="margin-top: 5px">人觉得好吃</p>
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">我创建的课堂</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">我加入的课堂</a>
+                </li>
 
-                    <img src="image/evaluate.png" alt="评论" class="evaluate float-left mutual"
-                         style="max-width: 25px;max-height: 25px;margin-left: 20px;cursor: pointer">
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
-                    <img src="image/share.png" alt="分享" class="share float-left mutual"
-                         style="max-width: 25px;max-height: 25px;margin-left: 20px;cursor: pointer">
-                </div>
-            </div>
+                    <ul class="list-group">
+                        <li class="classitem list-group-item">
+                            <div class="media">
+                                <img class="mr-3 image-fluid rounded-circle" src="image/userimage.png" alt="Generic placeholder image" style="max-width: 50px;max-height: 50px">
+                                <div class="media-body">
+                                    <h5 class="mt-0">川味火锅学堂</h5>
+                                    <span class="small"><strong>课堂简介：</strong><span>最正宗，最全面的川味火锅等你来学！！</span></span><br/>
 
-            <div class="h-75" style="padding-bottom: 100px">
-                <div class="media">
-                    <img class="mr-3 rounded-circle" src="image/userimage.png" alt="Generic placeholder image" style="max-width: 50px;max-height: 50px">
-                    <div class="media-body">
-                        <h5 class="mt-0">zgw</h5>
-                        <span class="small"><%=new Date()%></span>
-                    </div>
-                </div>
+                                    <a href="<s:url value="/classdetail"/>" class="float-right"><span>查看课堂详情</span></a>
+                                    <a href="<s:url value="/classdetail"/>" class="float-right"><span></span></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="classitem list-group-item">
+                            <div class="media">
+                                <img class="mr-3 image-fluid rounded-circle" src="image/userimage.png" alt="Generic placeholder image" style="max-width: 50px;max-height: 50px">
+                                <div class="media-body">
+                                    <h5 class="mt-0">徽菜源</h5>
+                                    <span class="small"><strong>课堂简介：</strong><span>来这你将学会如何做色香味俱全的传统徽菜！！</span></span><br/>
+                                    <a href="javascript:void(0);" class="float-right"><span>查看课堂详情</span></a>
+                                </div>
+                            </div>
+                        </li>
 
-                <div>
-                    <span class="d-block" style="padding: 5px">这里是动态内容，拉啦啦！</span>
-                    <div class="clearfix">
-                        <img src="image/userimage.png" class="float-left" style="max-width:40%;max-height:90%;">
-                        <img src="image/logo.png" class="float-left" style="max-width:40%;max-height:90%;">
-                    </div>
+                    </ul>
+                    <button style="margin: 20px" class="btn btn-primary " id="newclassbtn">创建新的课堂</button>
                 </div>
-                <hr/>
-                <div class="state-tail " style="margin-top: 20px">
-                    <a href="javascript:void(0);">
-                        <img src="image/dianzan.png" alt="好吃" class="dianzan float-left mutual"
-                             style="max-width: 25px;max-height: 25px;margin-left: 20px">
-                    </a>
-                    <p class="count small float-left text-muted" style="margin-top: 5px">1000</p>
-                    <p class="small float-left text-muted" style="margin-top: 5px">人觉得好吃</p>
-                    <a href="javascript:void(0);">
-                        <img src="image/evaluate.png" alt="评论" class="evaluate float-left mutual"
-                             style="max-width: 25px;max-height: 25px;margin-left: 20px">
-
-                    </a>
-                    <a href="javascript:void(0);">
-                        <img src="image/share.png" alt="分享" class="share float-left mutual"
-                             style="max-width: 25px;max-height: 25px;margin-left: 20px">
-                    </a>
-                </div>
-            </div>
-            <div class="h-75" style="padding-bottom: 100px">
-                <div class="media">
-                    <img class="mr-3 rounded-circle" src="image/userimage.png" alt="Generic placeholder image" style="max-width: 50px;max-height: 50px">
-                    <div class="media-body">
-                        <h5 class="mt-0">zgw</h5>
-                        <span class="small"><%=new Date()%></span>
-                    </div>
-                </div>
-                <div>
-                    <span class="d-block" style="padding-bottom: 5px">这里是动态内容，拉啦啦！</span>
-                    <video style="width: 90%" controls>
-                        <source src="video/dayandnight.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <hr/>
-                <div class="state-tail " style="margin-top: 20px">
-                    <a href="javascript:void(0);">
-                        <img src="image/dianzan.png" alt="好吃" class="dianzan float-left mutual"
-                             style="max-width: 25px;max-height: 25px;margin-left: 20px">
-                    </a>
-                    <p class="count small float-left text-muted" style="margin-top: 5px">1000</p>
-                    <p class="small float-left text-muted" style="margin-top: 5px">人觉得好吃</p>
-                    <a href="javascript:void(0);">
-                        <img src="image/evaluate.png" alt="评论" class="evaluate float-left mutual"
-                             style="max-width: 25px;max-height: 25px;margin-left: 20px">
-                    </a>
-                    <a href="javascript:void(0);">
-                        <img src="image/share.png" alt="分享" class="share float-left mutual"
-                             style="max-width: 25px;max-height: 25px;margin-left: 20px">
-                    </a>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <ul class="list-group">
+                        <li class="classitem list-group-item">
+                            <div class="media">
+                                <img class="mr-3 image-fluid rounded-circle" src="image/userimage.png" alt="Generic placeholder image" style="max-width: 50px;max-height: 50px">
+                                <div class="media-body">
+                                    <h5 class="mt-0">川味火锅学堂</h5>
+                                    <span class="small"><strong>课堂简介：</strong><span>最正宗，最全面的川味火锅等你来学！！</span></span><br/>
+                                    <a href="javascript:void(0);" class="float-right"><span>查看课堂详情</span></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="classitem list-group-item">
+                            <div class="media">
+                                <img class="mr-3 image-fluid rounded-circle" src="image/userimage.png" alt="Generic placeholder image" style="max-width: 50px;max-height: 50px">
+                                <div class="media-body">
+                                    <h5 class="mt-0">徽菜源</h5>
+                                    <span class="small"><strong>课堂简介：</strong><span>来这你将学会如何做色香味俱全的传统徽菜！！</span></span><br/>
+                                    <a href="javascript:void(0);" class="float-right"><span>查看课堂详情</span></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="classitem list-group-item">
+                            <div class="media">
+                                <img class="mr-3 image-fluid rounded-circle" src="image/userimage.png" alt="Generic placeholder image" style="max-width: 50px;max-height: 50px">
+                                <div class="media-body">
+                                    <h5 class="mt-0">徽菜源</h5>
+                                    <span class="small"><strong>课堂简介：</strong><span>来这你将学会如何做色香味俱全的传统徽菜！！</span></span><br/>
+                                    <a href="javascript:void(0);" class="float-right"><span>查看课堂详情</span></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

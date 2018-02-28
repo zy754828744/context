@@ -7,6 +7,15 @@ public class User {
     private String phoneNumber;
     private int age;
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    private String message; //简介
     private String password;
 
     public String getPassword() {
@@ -58,5 +67,10 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public User(String username, String message) {
+        this.username = username;
+        this.message = message;
     }
 }

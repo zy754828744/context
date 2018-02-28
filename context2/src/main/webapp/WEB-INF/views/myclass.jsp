@@ -21,7 +21,7 @@
     <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
     <link rel="stylesheet" href="css/bootstrap.css"/>
 
-    <title>个人主页</title>
+    <title>美食课堂动态</title>
 </head>
 <body>
 
@@ -90,6 +90,8 @@
         $(".evaluate").click(function () {
             $(".state-evaluate").show();
         })
+
+
     });
 
 </script>
@@ -116,7 +118,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="<s:url value="/home"/>">首页 <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<s:url value="/class"/>">美食课堂</a>
@@ -143,8 +145,7 @@
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="<s:url value="/userpage"/>">个人主页</a>
-                    <a class="dropdown-item" href="<s:url value="/createstate"/>">创建动态</a>
-                    <a class="dropdown-item" href="<s:url value="/set"/>">设置</a>
+                    <a class="dropdown-item" href="javascript:void(0);">账号管理</a>
                     <a class="dropdown-item" href="<s:url value="/loginout"/>">退出</a>
                 </div>
             </div>
@@ -159,7 +160,7 @@
                     <img class="card-img-top userimage rounded img-responsive" src="image/userimage.png"
                          alt="Card image">
                     <div class="card-body">
-                        <h6 id="username" class="text-center card-title"><%=session.getAttribute("username")%></h6>
+                        <h6 id="username" class="text-center card-title">用户名</h6>
                         <div class="card-text">
                             <nav class="navbar navbar-expand-md">
                                 <ul class="navbar-nav">
@@ -176,22 +177,22 @@
                         </div>
                     </div>
                 </div>
+                <li class="nav-item">
+                    <a href="javascript:void(0);" class="nav-link">全部</a>
+                </li>
+                <li class="nav-item ">
+                    <a href="<s:url value="/attention" />" class="nav-link urlNav">关注</a>
+                </li>
                 <li class="nav-item active">
-                    <a href="javascript:void(0);" class="nav-link">我的美食动态</a>
-                </li>
-                <li class="nav-item">
-                    <a href="<s:url value="/myclassstate" />" class="nav-link urlNav">我的课堂</a>
-                </li>
-                <li class="nav-item">
-                    <a href="javascript:void(0);" class="nav-link">私信</a>
+                    <a href="javascript:void(0);" class="nav-link">美食课堂动态</a>
                 </li>
                 <li>
-                    <a href="<s:url value="/set"/>" target="_blank" class="nav-link urlNav">设置</a>
+                    <a href="javascript:void(0);" target="_blank" class="nav-link urlNav">私信</a>
                 </li>
             </ul>
         </nav>
 
-        <div class="float-left " style="padding: 20px;width: 65%">
+        <div class="float-left " style="padding: 20px;width: 60%">
             <div class="h-75" style="padding-bottom: 100px">
                 <div class="media">
                     <img class="mr-3 rounded-circle" src="image/userimage.png" alt="Generic placeholder image" style="max-width: 50px;max-height: 50px">
@@ -288,6 +289,42 @@
             </div>
         </div>
 
+        <div class="float-right" style="width: 20%">
+            <div class="card">
+                <div class="card-header text-center bg-primary text-white">
+                    <h4>美食排行榜</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>名称</th>
+                            <th>热度</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>1</th>
+                            <th scope="row">重庆火锅</th>
+                            <th>12000</th>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <th>烤鸭</th>
+                            <th>10000</th>
+                        </tr>
+                        <tr>
+                            <th>3</th>
+                            <th>海鲜</th>
+                            <th>9996</th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
     </div>
 </main>

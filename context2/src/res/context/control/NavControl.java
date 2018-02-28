@@ -99,4 +99,11 @@ public class NavControl {
     public String delClass(HttpSession session){
         return "class";
     }
+
+    @RequestMapping(value = "/myclass") //美食课堂动态
+    public String delClassState(HttpSession session){
+        return "myclass";
+    }
+
+
 }

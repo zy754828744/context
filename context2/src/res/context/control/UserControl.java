@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.jws.WebParam;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -26,6 +28,15 @@ public class UserControl {
     @Autowired
     public void setRepository(UserRepository repository) {
         this.repository = repository;
+    }
+
+    private boolean isLogined(HttpSession session) {
+        Boolean isLogined = (Boolean) session.getAttribute("islogined");
+        if (isLogined == null || !isLogined) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     @RequestMapping(value = "/")
@@ -69,16 +80,15 @@ public class UserControl {
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String delLoginIn(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session){
-
-
         User user=repository.findUserByUsername(username);
 
         if(user==null){
             return "login";
         }
-
         session.setAttribute("islogined",true);
         session.setAttribute("username",username);
+        session.setAttribute("attentionCount",20);
+        session.setAttribute("fanCount",10);
         long id=user.getId();
         String url=forwardUrl.getForwardUrl();
         if(url.isEmpty())
@@ -105,5 +115,39 @@ public class UserControl {
     @RequestMapping(value="/userpage")
     public String deluserpage(){
         return "userpage";
+    }
+
+    @RequestMapping(value="/userfans")
+    public String delUserFans(Map model,HttpSession session){
+        //处理完之后返回userfans
+        if(!isLogined(session)){
+            forwardUrl.setForwardUrl("userfans");
+            return "login";
+        }
+        return "userfans";
+    }
+
+    @RequestMapping(value="/userattentions")
+    public String delUserAttentions(Map model,HttpSession session){
+        //处理完之后返回userfans
+        if(!isLogined(session)){
+            forwardUrl.setForwardUrl("userattentions");
+            return "login";
+        }
+        List<User> attentions=new ArrayList<>();
+        attentions.add(new User("张勇","帅哥一个"));
+        attentions.add(new User("张广伟","小逗比加坑逼一个"));
+        attentions.add(new User("土老比一个","他很懒，没有留下任何东西"));
+        model.put("attentions",attentions);
+        return "userattentions";
+    }
+
+    @RequestMapping(value = "/myclassstate")
+    public String delUserClassState(HttpSession session){
+        if(!isLogined(session)){
+            forwardUrl.setForwardUrl("myclassstate");
+            return "login";
+        }
+        return "myclassstate";
     }
 }
